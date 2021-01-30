@@ -24,10 +24,10 @@ I tested two options:
  
    Example: [deepSpeechTranscriptNative.js](deepSpeechTranscriptNative.js).
  
-  The example is very raugh, presuming the audio file is a "well formatted" WAV file. 
-  The audio file is just read in memory and the deepspeech `model.stt()` API is called.
-  [Official examples](https://github.com/mozilla/DeepSpeech-examples#javascript) repo
-  contains audio examples that show how to validate WAV, and speeech processing from streaming / in-memory buffers.
+   The example is very raugh, presuming the audio file is a "well formatted" WAV file. 
+   The audio file is just read in memory and the deepspeech `model.stt()` API is called.
+   [Official examples](https://github.com/mozilla/DeepSpeech-examples#javascript) repo
+   contains audio examples that show how to validate WAV, and speeech processing from streaming / in-memory buffers.
 
 ### DeepSpeech official native NodeJs API
 
@@ -40,7 +40,9 @@ I tested two options:
 DeepSpeech requires a 16bit 16 KHz mono WAV input audio file.
 To record such a file:
 ```
-sudo apt install sox`
+sudo apt install sox
+sudo apt install mediainfo
+
 rec -r 16k -c 1 my_recording.wav
 
 mediainfo my_recording.wav
