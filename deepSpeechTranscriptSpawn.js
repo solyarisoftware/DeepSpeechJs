@@ -1,13 +1,4 @@
-/*
- deepspeech --model deepspeech-0.9.3-models.pbmm --scorer deepspeech-0.9.3-models.scorer --audio audio/2830-3980-0043.wav > 2830-3980-0043.out
- */
 const spawn = require('child_process').spawn
-
-/*
--rw-r--r-- 1 giorgio 62K nov 18  2017 2830-3980-0043.wav
--rw-r--r-- 1 giorgio 86K nov 18  2017 4507-16021-0012.wav
--rw-r--r-- 1 giorgio 81K nov 18  2017 8455-210777-0068.wav
-*/
 
 //const AUDIO = 'audio/2830-3980-0043.wav'
 //const AUDIO = 'audio/8455-210777-0068.wav'
@@ -17,13 +8,21 @@ const SCORER = 'models/deepspeech-0.9.3-models.scorer'
 
 
 function deepSpeechTranscript(audiofile) {
-  return new Promise( (resolve /*, reject*/) => {
+  return new Promise( (resolve, reject) => {
 
-    const deepSpeechCLI = spawn('deepspeech', [
-      '--model', MODEL,
-      '--scorer', SCORER,
-      '--audio', audiofile
-    ])
+    let deepSpeechCLI
+
+    // deepspeech --model deepspeech-0.9.3-models.pbmm --scorer deepspeech-0.9.3-models.scorer --audio audio/2830-3980-0043.wav > 2830-3980-0043.out
+    try {
+      deepSpeechCLI = spawn('deepspeech', [
+        '--model', MODEL,
+        '--scorer', SCORER,
+        '--audio', audiofile
+      ])
+    }
+    catch (error) {
+      reject(error)
+    }
 
     deepSpeechCLI.stdout.on('data', data => {
 

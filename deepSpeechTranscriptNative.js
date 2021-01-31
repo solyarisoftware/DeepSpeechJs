@@ -13,6 +13,14 @@ const DeepSpeech = require('deepspeech')
  *
  * Initialize the model 
  * with specified pbmm and scorer files
+ *
+ * @param {String} modelPath 
+ * @param {String} scorerPath
+ * @return {Object} DeepSpeech Model
+ *
+ * TODO
+ * - add metadata object as parameter
+ *
  */
 function deepSpeechInitialize(modelPath, scorerPath) {
 
@@ -30,20 +38,28 @@ function deepSpeechInitialize(modelPath, scorerPath) {
  * return the speech to text (transcript) 
  * of the audio contained in the specified filename 
  *
+ * The function is async to avoid the caller thread is blocked
+ * - during audio file reading
+ * - but especially during the DeepSpeech engine processing.
+ *
  * @param {String} audioFile
- * @return {String} transcript 
+ * @return {Promise<String>} text transcript 
  */ 
 async function deepSpeechTranscript(audioFile, model) {
   
   let audioBuffer
 
   // read the Wav file in memory
-  //const audioBuffer = fs.readFileSync(audioFile)
   try { 
     audioBuffer = await fs.readFile(audioFile) 
   }  
-  catch (error) { throw error } 
+  catch (error) { 
+    throw error 
+  } 
 
+  // WARNING: 
+  // no audioBuffer validation is done.
+  // The audio fle must be a WAV audio in raw format.
 	
   return new Promise( (resolve, reject) => {
 
@@ -51,7 +67,9 @@ async function deepSpeechTranscript(audioFile, model) {
       const transcript = model.stt(audioBuffer)
       resolve( transcript )
     }
-    catch (error) { reject(error) } 
+    catch (error) { 
+      reject(error) 
+    } 
     
   })
 
@@ -104,7 +122,7 @@ async function main() {
 if (require.main === module) 
   main()
 
-// exports public function 
+
 module.exports = { 
   deepSpeechInitialize,
   deepSpeechTranscript
