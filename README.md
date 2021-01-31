@@ -115,10 +115,8 @@ of transcript of the audio file `./audio/4507-16021-0012.wav`
 (corresponding to text *why should one halt on the way*), in 3 cases:
 
 - using a bash script running the CLI `deepspeech` official client [deepspeech_cli.sh](deepspeech_cli.sh) 
-- using the nodejs client[deepSpeechTranscriptSpawn.js](deepSpeechTranscriptSpawn.js)
-- using the nodejs client [deepSpeechTranscriptNative.js](deepSpeechTranscriptNative.js)
-
-As expected, the native client transcript elapsed time (1553ms), is much better than the spawn client (1832ms).
+- using the nodejs "spawn" client [deepSpeechTranscriptSpawn.js](deepSpeechTranscriptSpawn.js)
+- using the nodejs native client [deepSpeechTranscriptNative.js](deepSpeechTranscriptNative.js)
 
 ```
 (deepspeech-venv) $ test_elapsed.sh
@@ -171,6 +169,8 @@ real	0m1,669s
 user	0m1,928s
 sys	0m0,103s
 ```
+
+As expected, the native client transcript elapsed time (1553ms), is much better than the spawn client (1832ms).
 
 
 ## To do
