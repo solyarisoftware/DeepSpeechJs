@@ -47,7 +47,7 @@ To record such a file:
 sudo apt install sox
 sudo apt install mediainfo
 
-rec -r 16k -c 1 my_recording.wav
+rec -f S16_BE -r 16000 -c 1 my_recording.wav
 
 mediainfo my_recording.wav
 General
@@ -100,7 +100,7 @@ Stream size                              : 64.0 KiB (100%)
 
 2. Install this repo
    ```bash
-   git clone https://solyarisoftware/deepspeeechjs
+   git clone https://solyarisoftware/deepspeeechjs && cd deepspeeechjs
    ```
 
 3. Install the official DeepSpeech npm package
