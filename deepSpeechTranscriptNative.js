@@ -54,25 +54,21 @@ async function deepSpeechTranscript(audioFile, model) {
     audioBuffer = await fs.readFile(audioFile) 
   }  
   catch (error) { 
-    throw error 
+    throw `readFile error: ${error}` 
   } 
 
   // WARNING: 
   // no audioBuffer validation is done.
   // The audio fle must be a WAV audio in raw format.
 	
-  return new Promise( (resolve, reject) => {
-
-    try { 
-      const transcript = model.stt(audioBuffer)
-      resolve( transcript )
-    }
-    catch (error) { 
-      reject(error) 
-    } 
+  try { 
+    const transcript = model.stt(audioBuffer)
+    return transcript
+  }
+  catch (error) { 
+    throw `model.stt error: ${error}` 
+  } 
     
-  })
-
 }
 
 
