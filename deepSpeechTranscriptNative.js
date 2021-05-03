@@ -1,7 +1,15 @@
 /**
- * https://deepspeech.readthedocs.io/en/v0.9.3/NodeJS-API.html
- * https://github.com/mozilla/DeepSpeech-examples#javascript
- * https://github.com/mozilla/DeepSpeech-examples/blob/r0.9/nodejs_wav/index.js
+ * 
+ *
+ * @See DeepSpeech API documentation
+ *      https://deepspeech.readthedocs.io/en/v0.9.3/NodeJS-API.html
+ *
+ * @See DeepSpeech NodeJs binding code
+ *      https://github.com/mozilla/DeepSpeech/blob/master/native_client/javascript/index.ts
+ *
+ * @See DeepSpeech NodeJs examples 
+ *      https://github.com/mozilla/DeepSpeech-examples#javascript
+ *      https://github.com/mozilla/DeepSpeech-examples/blob/r0.9/nodejs_wav/index.js
  */ 
 
 const fs = require('fs').promises
@@ -16,6 +24,7 @@ const DeepSpeech = require('deepspeech')
  *
  * @param {String} modelPath 
  * @param {String} scorerPath
+ *
  * @return {Object} DeepSpeech Model
  *
  * TODO
@@ -33,6 +42,19 @@ function deepSpeechInitialize(modelPath, scorerPath) {
 
 
 /**
+ * deepSpeechFreeModel
+ *
+ * Frees associated resources and destroys model object.
+ *
+ * @param {DeepSpeechMemoryModelObject} model
+ *
+ */
+function deepSpeechFreeModel(model) {
+  DeepSpeech.FreeModel(model)
+}  
+
+
+/**
  * deepSpeechTranscript
  *
  * return the speech to text (transcript) 
@@ -42,8 +64,10 @@ function deepSpeechInitialize(modelPath, scorerPath) {
  * - during audio file reading
  * - but especially during the DeepSpeech engine processing.
  *
- * @param {String} audioFile
- * @return {Promise<String>} text transcript 
+ * @param {String}                      audioFile
+ * @param {DeepSpeechMemoryModelObject} model
+ *
+ * @return {Promise<String>}            text transcript 
  */ 
 async function deepSpeechTranscript(audioFile, model) {
   
@@ -95,9 +119,10 @@ async function main() {
 
   end = new Date() - start
 
-  console.log(`\npbmm      : ${modelPath}`)
-  console.log(`scorer    : ${scorerPath}`)
-  console.log(`elapsed   : ${end}ms\n`)
+  console.log()
+  console.log(`pbmm                 : ${modelPath}`)
+  console.log(`scorer               : ${scorerPath}`)
+  console.log(`elapsed              : ${end}ms\n`)
  
   start = new Date()
 
@@ -108,9 +133,17 @@ async function main() {
 
   end = new Date() - start
 
-  console.log(`audio file: ${audioFile}`)
-  console.log(`transcript: ${result}`)
-  console.log(`elapsed   : ${end}ms\n`)
+  console.log(`audio file           : ${audioFile}`)
+  console.log(`transcript           : ${result}`)
+  console.log(`elapsed              : ${end}ms\n`)
+
+  start = new Date()
+
+  deepSpeechFreeModel(model)
+
+  end = new Date() - start
+  
+  console.log(`free model elapsed   : ${end}ms\n`)
 
 }
 
@@ -121,6 +154,7 @@ if (require.main === module)
 
 module.exports = { 
   deepSpeechInitialize,
-  deepSpeechTranscript
+  deepSpeechTranscript,
+  deepSpeechFreeModel
 }
 

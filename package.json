@@ -1,5 +1,28 @@
 {
   "dependencies": {
     "deepspeech": "^0.9.3"
-  }
+  },
+  "name": "deepspeechjs",
+  "description": "DeepSpeech runtime transcript NodeJs native client. Some examples and notes.",
+  "version": "0.0.8",
+  "main": "deepSpeechTranscriptNative.js",
+  "scripts": {
+    "test": "testPerformances.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solyarisoftware/DeepSpeechJs.git"
+  },
+  "keywords": [
+    "DeepSpeech",
+    "speech",
+    "recognition",
+    "ASR"
+  ],
+  "author": "Giorgio Robino <giorgio.robino@gmail.com> (http://convcomp.it/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/solyarisoftware/DeepSpeechJs/issues"
+  },
+  "homepage": "https://github.com/solyarisoftware/DeepSpeechJs#readme"
 }
