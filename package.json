@@ -4,7 +4,7 @@
   },
   "name": "deepspeechjs",
   "description": "DeepSpeech runtime transcript NodeJs native client. Some examples and notes.",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "deepSpeechTranscriptNative.js",
   "scripts": {
     "test": "testPerformances.js"

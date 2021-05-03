@@ -1,8 +1,7 @@
 # DeepSpeechJs
 
 DeepSpeech runtime transcript NodeJs native client.
-Some examples and notes. 
-
+Some examples and tests. 
 
 ## What's DeepSpeech?
 
@@ -120,6 +119,8 @@ of transcript of the audio file `./audio/4507-16021-0012.wav`
 
 ```
 (deepspeech-venv) $ test_elapsed.sh
+```
+```
 
 deepspeech_cli
 
@@ -172,12 +173,25 @@ sys	0m0,103s
 
 As expected, the native client transcript elapsed time (1553ms), is much better than the spawn client (1832ms).
 
+## Disclaimer 
+
+IMPORTANT: unfortunately npm package `deepspeech` cause a crash using node version 16.0.0.
+See [issue](https://github.com/mozilla/DeepSpeech/issues/3642).
+To run this project you have to downgrade installed Node version. 
+By example I had success with Node version 14.16.1.
+
+
+## Changelog
+
+- 0.0.9 test script testPerformances.sh improved
+
 
 ## To do
 
 - The project is in a very draft stage.
-- Add a better high-level API interface including metadata as parameters
-- Add a web server interface (using express or stuff)
+- Add a better high-level API interface. E.g. including metadata as parameters
+- Add a web server architectue. 
+  See: [How to use DeepSpeech for a text-to-speech server (in NodeJs)](https://discourse.mozilla.org/t/how-to-use-deepspeech-for-a-text-to-speech-server-in-nodejs/79636/2) 
 
 
 ## License
